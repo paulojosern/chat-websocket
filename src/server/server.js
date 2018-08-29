@@ -1,15 +1,22 @@
-const express = require('express')
-const http = require('http')
-const path = require('path')
+const express = require("express")
+const http = require("http")
+const path = require("path")
+const WebSocket = require('ws')
 
-let app = express()
+const app = express()
 let server = http.createServer(app)
+let ws = new WebSocket.Server({server})
 
-app.get("/", (res, resp) => {
-    resp.sendfile(path.resolve(__dirname, '..', 'client', 'index.html'))
-    resp.end()
+ws.on('connection', (wsClient) => {
+    wsClient.on('message', (msg) => {
+        ws.clients.forEach( (cl) => {
+            cl.send(msg)
+        })
+    })
 })
 
-app.listen(8000, () => {
-    console.log('subiu!!!!!!!!!!!')
+app.use("/", express.static(path.resolve(__dirname, "../client/")))
+
+server.listen(8000, () => {
+    console.log('server listen 8000')
 })

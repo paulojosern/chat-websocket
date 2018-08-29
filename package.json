@@ -4,7 +4,9 @@
   "description": "chat",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "nodemon ./src/server/server.js",
+    "compila": "npx webpack",
+    "compila-live": "npx webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -17,6 +19,15 @@
   },
   "homepage": "https://github.com/paulojosern/chat-websocket#readme",
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "vue": "^2.5.17",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0",
+    "ws": "^6.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.3",
+    "vue-loader": "^15.4.1",
+    "vue-template-compiler": "^2.5.17"
   }
 }
